@@ -51,12 +51,18 @@ class UserService
     {
         try {
             $user = auth()->user();
-            if (Hash::check($request['password'], $user->password)) {
-                $request['password'] = $user->password;
-                User::update($request);
-                return new GeneralResource(['message' => 'success']);
+
+            if (!$user) {
+                throw new UserException("Authenticated user not found");
             }
-            throw new UserException();
+
+            if (!Hash::check($request['password'], $user->password)) {
+                throw new UserException("Password incorret");
+            }
+
+            $request['password'] = $user->password;
+            User::whereExists("email", $user->email)->update($request);
+            return new GeneralResource(['message' => 'success']);
         } catch (UserException $e) {
             throw new UserException();
         }
@@ -73,7 +79,17 @@ class UserService
     public function destroy()
     {
         try {
-            User::touch('deleted_at');
+            $user = auth()->user();
+            if ($user) {
+                $record = User::whereExists("email", $user->email)->whereNull("deleted_at");
+                if ($record) {
+                    $record->touch('deleted_at');
+                } else {
+                    throw new UserException("Already delete");
+                }
+            } else {
+                throw new UserException("Authenticated user not found");
+            }
         } catch (UserException $e) {
             throw new UserException();
         }
