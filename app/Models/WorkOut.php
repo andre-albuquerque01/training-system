@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WorkOut extends Model
 {
@@ -24,5 +25,11 @@ class WorkOut extends Model
         "duration",
         "calories",
         "weight",
+        "repetition",
     ];
+
+    public function muscle(): HasMany
+    {
+        return $this->hasMany(Muscle::class, 'idMuscle', 'idWorkOut');
+    }
 }
