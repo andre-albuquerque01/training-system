@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("duration");
             $table->string("calories");
             $table->string("weight");
+            $table->string("repetition");
             $table->timestamps();
             $table->softDeletes();
         });

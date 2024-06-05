@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("user_workOut", function (Blueprint $table) {
-            $table->ulid("idUser_workOut");
+        Schema::create("muscle", function (Blueprint $table) {
+            $table->ulid("idMuscle");
+            $table->string("name");
             $table->index("user_id");
             $table->index("workOut_id");
             $table->foreignUlid("user_id")->references("idUser")->on("users")->onDelete('cascade')->onUpdate('cascade');
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('muscle');
     }
 };
