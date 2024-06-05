@@ -23,7 +23,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            "name" => ["required", "string", "min:4"],
+            "name" => ["required", "string", "min:4", "max:255"],
             "email" => [
                 "required",
                 "email",
