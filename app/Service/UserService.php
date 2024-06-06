@@ -7,6 +7,7 @@ use App\Exceptions\UserException;
 use App\Http\Resources\AuthResource;
 use App\Http\Resources\GeneralResource;
 use App\Http\Resources\UserResource;
+use App\Jobs\SendVerifyEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +24,7 @@ class UserService
     public function auth(array $data)
     {
         try {
-
-            if (Auth::attempt([$data, 'active' => 1])) {
+            if (Auth::attempt($data)) {
                 $user = Auth::user();
                 $token = $this->request->user()->createToken('Jesus+' . $user->name, ['*'], now()->addHours(2))->plainTextToken;
                 return new AuthResource(['token' => $token]);
@@ -41,6 +41,8 @@ class UserService
         try {
             $request['password'] = Hash::make($request['password']);
             User::create($request);
+            // dispatch(new SendVerifyEmail($request['email']));
+            SendVerifyEmail::dispatch($request['email']);
             return new GeneralResource(['message' => 'success']);
         } catch (UserException $e) {
             throw new UserException();
