@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create("workOut", function (Blueprint $table) {
             $table->ulid("idWorkOut")->primary();
             $table->string("name");
-            $table->string("description");
-            $table->string("image");
-            $table->string("video");
-            $table->string("muscle");
-            $table->string("equipment");
-            $table->string("difficulty");
-            $table->string("duration");
-            $table->string("calories");
-            $table->string("weight");
-            $table->string("repetition");
+            $table->string("description")->nullable();
+            $table->string("image")->nullable();
+            $table->string("video")->nullable();
+            $table->string("muscle")->nullable();
+            $table->string("equipment")->nullable();
+            $table->string("difficulty")->nullable();
+            $table->string("duration")->nullable();
+            $table->string("calories")->nullable();
+            $table->string("weight")->nullable();
+            $table->string("repetition")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
