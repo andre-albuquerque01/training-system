@@ -25,7 +25,7 @@ class WorkController extends Controller
             throw new WorkException();
         }
     }
-    public function create(WorkRequest $request)
+    public function store(WorkRequest $request)
     {
         try {
             return $this->service->create($request->validated());
