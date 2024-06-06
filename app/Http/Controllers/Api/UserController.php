@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $this->service = $service;
     }
-    public function create(UserRequest $request)
+    public function store(UserRequest $request)
     {
         try {
             return $this->service->create($request->validated());
