@@ -25,7 +25,7 @@ class MuscleController extends Controller
             throw new MuscleException();
         }
     }
-    public function create(MuscleRequest $request)
+    public function store(MuscleRequest $request)
     {
         try {
             return $this->service->create($request->validated());
