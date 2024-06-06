@@ -17,7 +17,7 @@ class MuscleService
             if (!$muscle) throw new MuscleException("Not found");
             return MuscleResource::collection($muscle);
         } catch (\Throwable $th) {
-            throw new MuscleException();
+            throw new MuscleException("Error");
         }
     }
 
