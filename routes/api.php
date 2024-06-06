@@ -14,9 +14,12 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::post('login', [AuthController::class, 'auth']);
-    Route::post('user', [UserController::class, 'create']);
+    Route::post('register', [UserController::class, 'store']);
     Route::apiResource('work', WorkController::class);
-    Route::apiResource('muscle', MuscleController::class);
     Route::middleware('auth:sanctum')->group(function () {
+        Route::post('update', [UserController::class, 'update']);
+        Route::post('show', [UserController::class, 'show']);
+        Route::post('destroy', [UserController::class, 'destroy']);
+        Route::apiResource('muscle', MuscleController::class);
     });
 });
