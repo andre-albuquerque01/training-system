@@ -14,13 +14,17 @@ class SendVerifyEmail implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public string $email;
+    private string $id;
+    private string $token;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(string $email)
+    public function __construct(string $email, string $id, string $token)
     {
         $this->email = $email;
+        $this->id = $id;
+        $this->token = $token;
     }
 
     /**
@@ -28,6 +32,6 @@ class SendVerifyEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        event(new Registered($this->email));
+        event(new Registered($this->email, $this->id, $this->token));
     }
 }
