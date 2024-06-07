@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\UserException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RecoverPasswordRequest;
 use App\Http\Requests\UserRequest;
 use App\Service\UserService;
 use Illuminate\Http\Request;
@@ -46,6 +47,38 @@ class UserController extends Controller
     {
         try {
             return $this->service->destroy();
+        } catch (UserException $e) {
+            throw new UserException();
+        }
+    }
+    public function verifyEmail(string $id, string $token)
+    {
+        try {
+            return $this->service->verifyEmail($id, $token);
+        } catch (UserException $e) {
+            throw new UserException();
+        }
+    }
+    public function resendEmail(Request $request)
+    {
+        try {
+            return $this->service->resendEmail($request->validate(["email" => "required|email|min:5"]));
+        } catch (UserException $e) {
+            throw new UserException('Failed to resend email', 0, $e);
+        }
+    }
+    public function recoverPassword(Request $request)
+    {
+        try {
+            return $this->service->recoverPassword($request->validate(["email" => "required|email|min:5"]));
+        } catch (UserException $e) {
+            throw new UserException('Failed to send email', 0, $e);
+        }
+    }
+    public function updateRecoverPassword(RecoverPasswordRequest $request)
+    {
+        try {
+            return $this->service->updateRecoverPassword($request->validated());
         } catch (UserException $e) {
             throw new UserException();
         }
