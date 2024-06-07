@@ -15,13 +15,17 @@ class Registered
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public string $email;
+    public string $id;
+    public string $token;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(string $email)
+    public function __construct(string $email, string $id, string $token)
     {
         $this->email = $email;
+        $this->id = $id;
+        $this->token = $token;
     }
 
     /**
