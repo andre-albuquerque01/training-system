@@ -14,12 +14,16 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::post('login', [AuthController::class, 'auth']);
-    Route::post('register', [UserController::class, 'store']);
-    Route::apiResource('work', WorkController::class);
+    Route::post('user/register', [UserController::class, 'store']);
+    Route::post('email/resendEmail', [UserController::class, 'resendEmail']);
+    Route::post('email/recoverPassword', [UserController::class, 'recoverPassword']);
+    Route::get('email/verify/{id}/{hash}', [UserController::class, 'verifyEmail']);
+    Route::post('user/updateRecoverPassword', [UserController::class, 'updateRecoverPassword']);
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('update', [UserController::class, 'update']);
-        Route::post('show', [UserController::class, 'show']);
-        Route::post('destroy', [UserController::class, 'destroy']);
+        Route::post('user/update', [UserController::class, 'update']);
+        Route::post('user/show', [UserController::class, 'show']);
+        Route::post('user/destroy', [UserController::class, 'destroy']);
         Route::apiResource('muscle', MuscleController::class);
+        Route::apiResource('work', WorkController::class);
     });
 });
