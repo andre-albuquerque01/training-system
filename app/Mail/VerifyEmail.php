@@ -27,7 +27,10 @@ class VerifyEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Verify Email',
+            subject: $this->data['subject'],
+            to: [
+                $this->data['toEmail']
+            ],
         );
     }
 
