@@ -27,7 +27,8 @@ class SendEmailRegistered
         Mail::to($event->email)->send(new VerifyEmail([
             'toEmail' => $event->email,
             'subject' => 'Verificação de e-mail',
-            'message' => Crypt::encryptString($event->email)
+            'message' => $event->id,
+            'token' => $event->token
         ]));
     }
 }
