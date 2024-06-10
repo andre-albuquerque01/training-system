@@ -20,7 +20,8 @@ class MuscleResource extends JsonResource
             'name' => $this->name,
             'updated_at' => $this->updated_at,
             'userId' => $this->user_id,
-            'workout' => WorkResource::collection($this->whenLoaded('workOut')),
+            'workOutId' => $this->workOut_id,
+            'workout' => new WorkResource($this->workOut),
         ];
     }
 }
