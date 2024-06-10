@@ -20,14 +20,14 @@ class Muscle extends Model
         'user_id',
         'workOut_id',
     ];
-
+    
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function workOut(): BelongsTo
     {
-        return $this->belongsTo(WorkOut::class, "workOut_id");
+        return $this->belongsTo(WorkOut::class, 'workOut_id');
     }
 }
