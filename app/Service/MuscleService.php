@@ -13,7 +13,7 @@ class MuscleService
     public function index()
     {
         try {
-            $muscle = Muscle::where('user_id', auth()->user()->idUser)->with(["workOut" => function ($query) {
+            $muscle = auth()->user()->muscle()->with(["workOut" => function ($query) {
                 $query->whereNull("deleted_at");
             }])->get();
             if ($muscle->isEmpty()) throw new MuscleException("Not found");
