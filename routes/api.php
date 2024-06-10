@@ -20,6 +20,7 @@ Route::prefix('v1')->group(function () {
     Route::get('email/verify/{id}/{hash}', [UserController::class, 'verifyEmail']);
     Route::post('user/updateRecoverPassword', [UserController::class, 'updateRecoverPassword']);
     Route::middleware('auth:sanctum')->group(function () {
+        Route::post('logout', [AuthController::class, 'logout']);
         Route::post('user/update', [UserController::class, 'update']);
         Route::post('user/show', [UserController::class, 'show']);
         Route::post('user/destroy', [UserController::class, 'destroy']);
