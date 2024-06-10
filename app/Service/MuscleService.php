@@ -13,11 +13,13 @@ class MuscleService
     public function index()
     {
         try {
-            $muscle = auth()->user()->muscle()->with('workOut')->get();
-            if (!$muscle) throw new MuscleException("Not found");
+            $muscle = Muscle::where('user_id', auth()->user()->idUser)->with(["workOut" => function ($query) {
+                $query->whereNull("deleted_at");
+            }])->get();
+            if ($muscle->isEmpty()) throw new MuscleException("Not found");
             return MuscleResource::collection($muscle);
-        } catch (\Throwable $th) {
-            throw new MuscleException("Error");
+        } catch (\Exception $th) {
+            throw new MuscleException("Error" . $th->getMessage());
         }
     }
 
@@ -35,7 +37,9 @@ class MuscleService
     public function show(string $id)
     {
         try {
-            $muscle = Muscle::find($id)->where("user_id", auth()->user()->idUser)->with('workOut')->get();
+            $muscle = Muscle::find($id)->where("user_id", auth()->user()->idUser)->with(["workOut" => function ($query) {
+                $query->whereNull("deleted_at");
+            }])->get();
             if (!$muscle) throw new MuscleException("Not found");
             return MuscleResource::collection($muscle);
         } catch (\Throwable $th) {
