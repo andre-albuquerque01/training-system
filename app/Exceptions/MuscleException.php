@@ -6,13 +6,13 @@ use Exception;
 
 class MuscleException extends Exception
 {
-    public $message = 'User don\'t create';
+    protected $message = 'Error';
 
     public function render()
     {
         return response()->json([
             'error' => class_basename($this),
-            'message' => $this->message
+            'message' => $this->message,
         ], 401);
     }
 }
