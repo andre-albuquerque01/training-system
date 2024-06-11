@@ -55,8 +55,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function muscle(): HasMany
+    public function trainingType(): HasMany
     {
-        return $this->hasMany(Muscle::class, 'user_id', 'idUser');
+        return $this->hasMany(TrainingType::class, 'user_id', 'idUser');
     }
 }
