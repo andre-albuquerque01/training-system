@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MuscleController;
+use App\Http\Controllers\Api\TrainingWorkOutController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WorkController;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ Route::prefix('v1')->group(function () {
         Route::post('user/update', [UserController::class, 'update']);
         Route::post('user/show', [UserController::class, 'show']);
         Route::post('user/destroy', [UserController::class, 'destroy']);
-        Route::apiResource('muscle', MuscleController::class);
         Route::apiResource('work', WorkController::class);
+        Route::apiResource('trainingWorkOut', TrainingWorkOutController::class);
     });
 });
