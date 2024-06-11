@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MuscleController;
+use App\Http\Controllers\Api\TrainingTypeController;
 use App\Http\Controllers\Api\TrainingWorkOutController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WorkController;
@@ -27,5 +28,6 @@ Route::prefix('v1')->group(function () {
         Route::post('user/destroy', [UserController::class, 'destroy']);
         Route::apiResource('work', WorkController::class);
         Route::apiResource('trainingWorkOut', TrainingWorkOutController::class);
+        Route::apiResource('trainingType', TrainingTypeController::class);
     });
 });
