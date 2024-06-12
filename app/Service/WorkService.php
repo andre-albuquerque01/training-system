@@ -43,8 +43,8 @@ class WorkService
     public function show(string $id)
     {
         try {
-            $work = WorkOut::findOrFail($id);
-            return WorkResource::collection($work);
+            $work = WorkOut::findOrFail($id)->first();
+            return new WorkResource($work);
         } catch (\Throwable $th) {
             throw new WorkException();
         }
@@ -59,12 +59,12 @@ class WorkService
                 throw new WorkException("Authenticated user not found");
             }
 
-            $record = WorkOut::findOrFail($id)->whereNull("deleted_at");
-            if ($record) {
-                $record->touch('deleted_at');
-            } else {
+            $record = WorkOut::where("idWorkOut", $id)->whereNull("deleted_at")->first();
+            if (!$record) {
                 throw new WorkException("Already delete");
             }
+
+            $record->touch('deleted_at');
             return new GeneralResource(["message" => "success"]);
         } catch (\Throwable $th) {
             throw new WorkException();
