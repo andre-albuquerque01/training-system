@@ -22,6 +22,7 @@ class TrainingTypeResource extends JsonResource
             'updated_at' => $this->updated_at,
             'userId' => $this->user_id,
             'training' => TrainingWorkOutResource::collection($this->whenLoaded('training')),
+
         ];
     }
 }
