@@ -87,14 +87,14 @@ class UserService
     public function destroy()
     {
         try {
-            $user = auth()->user();
+            $user = auth()->user()->idUser;
             if ($user) {
-                $record = User::where("email", $user->email)->whereNull("deleted_at");
-                if ($record) {
-                    $record->touch('deleted_at');
-                } else {
+                $record = User::where("idUser", $user)->whereNull("deleted_at")->first();
+                if (!$record) {
                     throw new UserException("Already delete");
                 }
+                $record->touch('deleted_at');
+                return new GeneralResource(["message" => "success"]);
             } else {
                 throw new UserException("Authenticated user not found");
             }
