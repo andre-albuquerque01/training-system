@@ -53,7 +53,7 @@ class WorkService
     public function destroy(string $id): GeneralResource
     {
         try {
-            $user = auth()->user();
+            $user = auth()->user()->idUser;
 
             if (!$user) {
                 throw new WorkException("Authenticated user not found");
