@@ -48,12 +48,11 @@ class TrainingWorkOutService
     public function show(string $id)
     {
         try {
-            $user  = auth()->user()->idUser;
             $training = TrainingWorkOut::where("idTrainingWorkOut", $id)->with('workOut')->first();
 
             if (!$training) throw new TrainingException("Not found");
 
-            return TrainingWorkOutResource::collection($training);
+            return new TrainingWorkOutResource($training);
         } catch (\Exception $th) {
             throw new TrainingException("Error" . $th->getMessage());
         }
@@ -61,7 +60,7 @@ class TrainingWorkOutService
     public function destroy(string $id)
     {
         try {
-            $user = auth()->user();
+            $user = auth()->user()->idUser;
 
             if (!$user) {
                 throw new TrainingException("Authenticated user not found");
