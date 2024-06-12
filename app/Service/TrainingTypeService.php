@@ -12,7 +12,8 @@ class TrainingTypeService
     public function index()
     {
         try {
-            $training = auth()->user()->trainingType();
+            $training = auth()->user()->trainingType()->whereNull('deleted_at')->get();
+
             if ($training->isEmpty()) throw new TrainingException("Not found");
             return TrainingTypeResource::collection($training);
         } catch (\Exception $th) {
@@ -34,7 +35,7 @@ class TrainingTypeService
     {
         try {
             $user  = auth()->user()->idUser;
-            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->first();
+            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull('deleted_at')->first();
 
             if (!$training) throw new TrainingException("Not found");
 
@@ -49,11 +50,11 @@ class TrainingTypeService
     {
         try {
             $user  = auth()->user()->idUser;
-            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->first();
+            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull('deleted_at')->first();
 
             if (!$training) throw new TrainingException("Not found");
 
-            return TrainingTypeResource::collection($training);
+            return new TrainingTypeResource($training);
         } catch (\Exception $th) {
             throw new TrainingException("Error" . $th->getMessage());
         }
@@ -61,18 +62,18 @@ class TrainingTypeService
     public function destroy(string $id)
     {
         try {
-            $user = auth()->user();
+            $user = auth()->user()->idUser;
 
             if (!$user) {
                 throw new TrainingException("Authenticated user not found");
             }
 
-            $record = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull("deleted_at");
-            if ($record) {
-                $record->touch('deleted_at');
-            } else {
+            $record = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull("deleted_at")->first();
+            if (!$record) {
                 throw new TrainingException("Already delete");
             }
+
+            $record->touch('deleted_at');
             return new GeneralResource(["message" => "success"]);
         } catch (\Exception $th) {
             throw new TrainingException("Error" . $th->getMessage());
