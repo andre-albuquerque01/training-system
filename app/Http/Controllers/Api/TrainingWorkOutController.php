@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\TrainingException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TrainingWorkOutRequest;
 use App\Service\TrainingWorkOutService;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class TrainingWorkOutController extends Controller
             throw new TrainingException();
         }
     }
-    public function store(Request $request)
+    public function store(TrainingWorkOutRequest $request)
     {
         try {
             return $this->service->store($request->validated());
@@ -33,7 +34,7 @@ class TrainingWorkOutController extends Controller
         }
     }
 
-    public function update(Request $request, string $id)
+    public function update(TrainingWorkOutRequest $request, string $id)
     {
         try {
             return $this->service->update($request->validated(), $id);
