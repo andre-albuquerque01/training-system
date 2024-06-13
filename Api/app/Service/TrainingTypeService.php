@@ -14,7 +14,7 @@ class TrainingTypeService
         try {
             $training = auth()->user()->trainingType()->whereNull('deleted_at')->get();
 
-            if ($training->isEmpty()) throw new TrainingException("Not found");
+            if ($training->isEmpty()) return new GeneralResource(["message" => "not found"]);
             return TrainingTypeResource::collection($training);
         } catch (\Exception $th) {
             throw new TrainingException("Error" . $th->getMessage());
@@ -50,7 +50,8 @@ class TrainingTypeService
     {
         try {
             $user  = auth()->user()->idUser;
-            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull('deleted_at')->first();
+            
+            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull('deleted_at')->with(['training.workOut'])->first();
 
             if (!$training) throw new TrainingException("Not found");
 

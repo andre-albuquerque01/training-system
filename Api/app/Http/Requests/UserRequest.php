@@ -50,6 +50,7 @@ class UserRequest extends FormRequest
                     ->symbols()
                     ->uncompromised(),
             ],
+            "term_aceite" => ["required"],
         ];
 
         if ($this->method() === "PUT") {
@@ -70,6 +71,7 @@ class UserRequest extends FormRequest
                     ->symbols()
                     ->uncompromised(),
             ];
+            $rules["term_aceite"] = ["nullable"];
         }
         return $rules;
     }
