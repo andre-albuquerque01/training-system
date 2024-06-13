@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { roboto } from './fonts'
+import { fontBody } from './fonts'
 
 export const metadata: Metadata = {
   title: 'Gym',
@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-br">
-      <body className={roboto.className}>{children}</body>
+    <html lang="pt-br" className={`bg-zinc-200 ${fontBody.className}`}>
+      <body className="max-w-[1200px] mx-auto antialiased">{children}</body>
     </html>
   )
 }
