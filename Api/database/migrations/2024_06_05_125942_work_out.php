@@ -15,8 +15,8 @@ return new class extends Migration
             $table->ulid("idWorkOut")->primary();
             $table->string("name");
             $table->string("description")->nullable();
-            $table->string("image")->nullable();
-            $table->string("video")->nullable();
+            $table->longText("image")->nullable();
+            $table->longText("video")->nullable();
             $table->string("muscle")->nullable();
             $table->string("equipment")->nullable();
             $table->string("difficulty")->nullable();
