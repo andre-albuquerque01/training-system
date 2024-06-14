@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { fontBody } from './fonts'
+import { Header } from '@/components/header/header'
 
 export const metadata: Metadata = {
   title: 'Gym',
@@ -13,8 +14,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-br" className={`bg-zinc-200 ${fontBody.className}`}>
-      <body className="max-w-[1200px] mx-auto antialiased">{children}</body>
+    <html
+      lang="pt-br"
+      className={`bg-zinc-200 scroll-smooth antialiased ${fontBody.className}`}
+    >
+      <body>
+        <Header />
+        <div className="max-w-[1200px] mx-auto antialiased">{children}</div>
+      </body>
     </html>
   )
 }
