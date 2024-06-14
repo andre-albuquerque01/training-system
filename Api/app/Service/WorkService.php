@@ -33,7 +33,7 @@ class WorkService
     public function update(array $request, string $id): GeneralResource
     {
         try {
-            WorkOut::findOrFail($id)->update($request);
+            WorkOut::where("idWorkOut", $id)->update($request);
             return new GeneralResource(["message" => "success"]);
         } catch (\Throwable $th) {
             throw new WorkException();
@@ -43,7 +43,7 @@ class WorkService
     public function show(string $id)
     {
         try {
-            $work = WorkOut::findOrFail($id)->first();
+            $work = WorkOut::where("idWorkOut", $id)->first();
             return new WorkResource($work);
         } catch (\Throwable $th) {
             throw new WorkException();

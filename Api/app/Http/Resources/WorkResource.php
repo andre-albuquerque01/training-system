@@ -14,20 +14,20 @@ class WorkResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
-        // return [
-        //     'idWorkOut' => $this->idWorkOut,
-        //     'name' => $this->name,
-        //     'description' => $this->description,
-        //     'image' => $this->image,
-        //     'video' => $this->video,
-        //     'muscle' => $this->muscle,
-        //     'equipment' => $this->equipment,
-        //     'difficulty' => $this->difficulty,
-        //     'duration' => $this->duration,
-        //     'calories' => $this->calories,
-        //     'weight' => $this->weight,
-        //     'repetition' => $this->repetition,
-        // ];
+        // return parent::toArray($request);
+        return [
+            'idWorkOut' => $this->idWorkOut,
+            'name' => $this->name,
+            'description' => $this->description,
+            'image' => $this->image,
+            'video' => $this->video,
+            'muscle' => $this->muscle,
+            'equipment' => $this->equipment,
+            'difficulty' => $this->difficulty,
+            'duration' => $this->duration,
+            'calories' => $this->calories,
+            'weight' => $this->weight,
+            'repetition' => $this->repetition,
+        ];
     }
 }
