@@ -19,7 +19,6 @@ class WorkOut extends Model
         'name',
         'description',
         'image',
-        'video',
         "muscle",
         "equipment",
         "difficulty",
