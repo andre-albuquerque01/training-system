@@ -51,7 +51,11 @@ class TrainingTypeService
         try {
             $user  = auth()->user()->idUser;
             
-            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull('deleted_at')->with(['training.workOut'])->first();
+            $training = TrainingType::where("idTrainingType", $id)->where("user_id",  $user)->whereNull('deleted_at')->with(['training' => function($query) {
+                $query->whereNull('deleted_at')->with(['workOut' => function($query) {
+                    $query->whereNull('deleted_at');
+                }]);
+            }])->first();
 
             if (!$training) throw new TrainingException("Not found");
 
