@@ -59,4 +59,13 @@ class TrainingWorkOutController extends Controller
             throw new TrainingException();
         }
     }
+
+    public function destroyWorkOut(string $id)
+    {
+        try {
+            return $this->service->destroyWorkOut($id);
+        } catch (TrainingException $e) {
+            throw new TrainingException();
+        }
+    }
 }
