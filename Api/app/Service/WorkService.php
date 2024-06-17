@@ -13,7 +13,7 @@ class WorkService
     public function index()
     {
         try {
-            $work = WorkOut::get();
+            $work = WorkOut::whereNull("deleted_at")->get();
             return WorkResource::collection($work);
         } catch (\Throwable $th) {
             throw new WorkException();
