@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("name");
             $table->string("description")->nullable();
             $table->longText("image")->nullable();
-            $table->longText("video")->nullable();
             $table->string("muscle")->nullable();
             $table->string("equipment")->nullable();
             $table->string("difficulty")->nullable();
