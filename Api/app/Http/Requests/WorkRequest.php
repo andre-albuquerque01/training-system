@@ -24,15 +24,14 @@ class WorkRequest extends FormRequest
         return [
             'name' => "required|min:2|max:255|string",
             'description' => "nullable|min:2|max:255|string",
-            'image' => "nullable|min:2|max:255|string",
-            'video' => "nullable|min:2|max:255|string",
+            'image' => "nullable|min:2|string",
             "muscle" => "nullable|min:2|max:255|string",
             "equipment" => "nullable|min:2|max:255|string",
             "difficulty" => "nullable|min:2|max:255|string",
             "duration" => "nullable|min:2|max:255|string",
             "calories" => "nullable|min:2|max:255|string",
             "weight" => "nullable|min:2|max:255|string",
-            "repetition" => "nullable|min:2|max:255|string",
+            "repetition" => "nullable|min:1|max:255|string",
         ];
     }
 }
