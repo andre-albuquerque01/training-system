@@ -13,7 +13,11 @@ class TrainingWorkOutService
     public function index()
     {
         try {
-            $training = auth()->user()->trainingType()->with(['training.workOut'])->get();
+            $training = auth()->user()->trainingType()->with(['training' => function($query) {
+                $query->whereNull('deleted_at')->with(['workOut' => function($query) {
+                    $query->whereNull('deleted_at');
+                }]);
+            }])->get();
             if ($training->isEmpty()) throw new TrainingException("Not found");
             return TrainingTypeResource::collection($training);
         } catch (\Exception $th) {
@@ -67,6 +71,26 @@ class TrainingWorkOutService
             }
 
             $record = TrainingWorkOut::where("idTrainingWorkOut", $id)->whereNull("deleted_at");
+            if ($record) {
+                $record->touch('deleted_at');
+            } else {
+                throw new TrainingException("Already delete");
+            }
+            return new GeneralResource(["message" => "success"]);
+        } catch (\Exception $th) {
+            throw new TrainingException("Error" . $th->getMessage());
+        }
+    }
+    public function destroyWorkOut(string $id)
+    {
+        try {
+            $user = auth()->user()->idUser;
+
+            if (!$user) {
+                throw new TrainingException("Authenticated user not found");
+            }
+
+            $record = TrainingWorkOut::where("workOut_id", $id)->whereNull("deleted_at");
             if ($record) {
                 $record->touch('deleted_at');
             } else {
