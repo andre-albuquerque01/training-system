@@ -28,6 +28,7 @@ Route::prefix('v1')->group(function () {
         Route::post('user/destroy', [UserController::class, 'destroy']);
         Route::apiResource('work', WorkController::class);
         Route::apiResource('trainingWorkOut', TrainingWorkOutController::class);
+        Route::delete('trainingWorkOut/destroyWorkOut/{id}', [TrainingWorkOutController::class, 'destroyWorkOut']);
         Route::apiResource('trainingType', TrainingTypeController::class);
     });
 });
