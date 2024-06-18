@@ -22,10 +22,10 @@ export default async function ShowOneTrainingType(id: string) {
         Accept: 'application/json',
         Authorization: 'Bearer ' + cookies().get('token')?.value,
       },
-      cache: 'no-cache',
-      // next: {
-      //   revalidate: 30 * 60,
-      // },
+      next: {
+        revalidate: 30 * 60,
+        tags: ['training'],
+      },
     })
     const data = await response.json()
     if (data.message === 'Unauthenticated.' || !data) {
