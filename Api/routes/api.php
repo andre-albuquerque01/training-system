@@ -18,14 +18,14 @@ Route::prefix('v1')->group(function () {
     Route::post('login', [AuthController::class, 'auth']);
     Route::post('user/register', [UserController::class, 'store']);
     Route::post('email/resendEmail', [UserController::class, 'resendEmail']);
-    Route::post('email/recoverPassword', [UserController::class, 'recoverPassword']);
     Route::get('email/verify/{id}/{hash}', [UserController::class, 'verifyEmail']);
+    Route::post('email/recoverPassword', [UserController::class, 'recoverPassword']);
     Route::post('user/updateRecoverPassword', [UserController::class, 'updateRecoverPassword']);
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
-        Route::post('user/update', [UserController::class, 'update']);
-        Route::post('user/show', [UserController::class, 'show']);
-        Route::post('user/destroy', [UserController::class, 'destroy']);
+        Route::put('user/update', [UserController::class, 'update']);
+        Route::get('user/show', [UserController::class, 'show']);
+        Route::delete('user/destroy', [UserController::class, 'destroy']);
         Route::apiResource('work', WorkController::class);
         Route::apiResource('trainingWorkOut', TrainingWorkOutController::class);
         Route::delete('trainingWorkOut/destroyWorkOut/{id}', [TrainingWorkOutController::class, 'destroyWorkOut']);
