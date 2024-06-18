@@ -1,6 +1,7 @@
 'use server'
 
 import ApiAction from '@/functions/data/apiAction'
+import { RevalidateTag } from '@/functions/data/revalidateTag'
 import apiError from '@/functions/error/apiErro'
 import VerificationPassword from '@/functions/other/verifyPassword'
 import { redirect } from 'next/navigation'
@@ -49,5 +50,6 @@ export async function InsertUser(
   } catch (error) {
     return apiError(error)
   }
+  RevalidateTag('user')
   redirect('/')
 }
