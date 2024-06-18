@@ -2,9 +2,10 @@ import ShowOneTrainingType, {
   TrainingTypeInterface,
 } from '@/actions/trainingType/showOneTraining'
 import { TrainingInterface } from '@/actions/trainingType/showTraining'
+import { DeleteTrainingComponente } from '@/components/training/delete'
+import { DeleteTrainingWorkOutComponente } from '@/components/trainingWorkOut/delete'
 import Image from 'next/image'
 import Link from 'next/link'
-import { BiTrash } from 'react-icons/bi'
 import { CiCirclePlus } from 'react-icons/ci'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 
@@ -13,14 +14,19 @@ export default async function Training({ params }: { params: { id: string } }) {
 
   return (
     <div className="p-4">
-      <div className=" inline-block">
-        <Link
-          href="/workOut/insert"
-          className="flex items-center gap-1 hover:text-blue-500"
-        >
-          <CiCirclePlus className="w-5 h-5" />
-          Adicionar itens
-        </Link>
+      <div className="flex flex-col gap-3">
+        <div className="inline-block">
+          <Link
+            href={`/trainingWorkOut/insert/${params.id}`}
+            className="flex items-center gap-1 hover:text-blue-500"
+          >
+            <CiCirclePlus className="w-5 h-5" />
+            Adicionar itens
+          </Link>
+        </div>
+        <div className="inline-block">
+          <DeleteTrainingComponente id={params.id} />
+        </div>
       </div>
       <h1 className="font-bold text-xl">{data.name}</h1>
       <p>{data.description}</p>
@@ -45,7 +51,7 @@ export default async function Training({ params }: { params: { id: string } }) {
               <Link href={`/workOut/${item.workOut.idWorkOut}`}>
                 <MdKeyboardArrowRight className="w-5 h-8" />
               </Link>
-              <BiTrash className="w-5 h-5 absolute top-2 left-2" />
+              <DeleteTrainingWorkOutComponente id={item.workOut.idWorkOut} />
             </div>
           </div>
         ))}
