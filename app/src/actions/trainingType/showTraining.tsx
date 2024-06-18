@@ -19,8 +19,8 @@ export default async function ShowTrainingType() {
         Authorization: 'Bearer ' + cookies().get('token')?.value,
       },
       next: {
-        revalidate: 60 * 30,
-        tags: ['user'],
+        revalidate: 30 * 60,
+        tags: ['training'],
       },
     })
     const data = await response.json()
