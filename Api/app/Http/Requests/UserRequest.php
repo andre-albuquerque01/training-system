@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class UserRequest extends FormRequest
@@ -60,17 +61,18 @@ class UserRequest extends FormRequest
                 "email",
                 "max:255",
                 "min:2",
-                "unique:users,email,{$this->user->id}",
+                Rule::unique('users', 'email')->ignore($this->user()->idUser, 'idUser'),
             ];
             $rules["password"] = [
                 "required",
                 Password::min(8)
-                    ->mixedCase()
-                    ->letters()
-                    ->numbers()
-                    ->symbols()
-                    ->uncompromised(),
+                ->mixedCase()
+                ->letters()
+                ->numbers()
+                ->symbols()
+                ->uncompromised(),
             ];
+            $rules["password_confirmation"] = ["nullable"];
             $rules["term_aceite"] = ["nullable"];
         }
         return $rules;
