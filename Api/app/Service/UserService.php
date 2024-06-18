@@ -79,7 +79,7 @@ class UserService
     public function show()
     {
         try {
-            return UserResource::collection(auth()->user());
+            return new UserResource(auth()->user());
         } catch (UserException $e) {
             throw new UserException();
         }
