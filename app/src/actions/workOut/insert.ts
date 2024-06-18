@@ -1,6 +1,7 @@
 'use server'
 
 import ApiAction from '@/functions/data/apiAction'
+import { RevalidateTag } from '@/functions/data/revalidateTag'
 import apiError from '@/functions/error/apiErro'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -41,5 +42,6 @@ export async function InsertWorkOut(
   } catch (error) {
     return apiError(error)
   }
-  redirect('/')
+  RevalidateTag('workOut')
+  redirect('/workOut')
 }
