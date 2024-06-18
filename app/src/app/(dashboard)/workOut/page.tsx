@@ -1,7 +1,7 @@
 import ShowWorkOut, { WorkOutInterface } from '@/actions/workOut/showWorkOut'
+import { DeleteWorkOutComponente } from '@/components/workOut/delete'
 import Image from 'next/image'
 import Link from 'next/link'
-import { BiTrash } from 'react-icons/bi'
 import { CiCirclePlus } from 'react-icons/ci'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 
@@ -10,7 +10,7 @@ export default async function WorkOut() {
 
   return (
     <div className="p-4">
-      <div className=" inline-block">
+      <div className="inline-block">
         <Link
           href="/workOut/insert"
           className="flex items-center gap-1 hover:text-blue-500"
@@ -41,7 +41,7 @@ export default async function WorkOut() {
                   <Link href={`/workOut/${data.idWorkOut}`}>
                     <MdKeyboardArrowRight className="w-5 h-8" />
                   </Link>
-                  <BiTrash className="w-5 h-5 absolute top-2 left-2" />
+                  <DeleteWorkOutComponente id={data.idWorkOut} />
                 </div>
               </div>
             </div>
