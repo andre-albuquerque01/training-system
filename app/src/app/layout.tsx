@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { fontBody } from './fonts'
 import { Header } from '@/components/header/header'
+import { cookies } from 'next/headers'
 
 export const metadata: Metadata = {
   title: 'Gym',
@@ -13,13 +14,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const token = cookies().get('token')?.value
   return (
     <html
       lang="pt-br"
       className={`bg-zinc-200 scroll-smooth antialiased ${fontBody.className}`}
     >
       <body>
-        <Header />
+        {token && <Header />}
         <div className="max-w-[1200px] mx-auto antialiased">{children}</div>
       </body>
     </html>
