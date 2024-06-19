@@ -30,15 +30,22 @@ export async function InsertWorkOut(
     })
 
     const data = await response.json()
-    console.log(data)
 
     const message =
       typeof data.message === 'string'
         ? data.message
         : JSON.stringify(data.message)
 
-    if (message && message.includes('The email has already been taken.'))
-      throw new Error('E-mail já cadastrado!')
+    if (
+      message &&
+      message.includes('The description field must be at least 2 characters.')
+    )
+      throw new Error('O campo descrição tem que ter mais de 5 caracteres')
+    if (
+      message &&
+      message.includes('The image field must be at least 2 characters.')
+    )
+      throw new Error('O campo imagem tem ter mais de 10 caracteres.')
   } catch (error) {
     return apiError(error)
   }
