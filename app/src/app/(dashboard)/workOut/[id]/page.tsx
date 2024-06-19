@@ -18,13 +18,15 @@ export default async function WorkOutOne({
       <div className="flex flex-col items-center">
         <div>
           <div className="mt-5 space-y-1 max-w-80">
-            <Image
-              src={`${data.image}`}
-              width={320}
-              height={320}
-              alt="Imagem"
-              className="max-w-80 min-w-20 max-h-80 min-h-10 object-contain"
-            />
+            {data.image && (
+              <Image
+                src={`${data.image}`}
+                width={320}
+                height={320}
+                alt="Imagem"
+                className="max-w-80 min-w-20 max-h-80 min-h-10 object-contain"
+              />
+            )}
             <p className="font-medium text-lg">{data.name}</p>
             <p className="text-lg text-justify">{data.description}</p>
             <p className="text-lg">Músculo: {data.muscle}</p>
@@ -36,7 +38,10 @@ export default async function WorkOutOne({
             <p className="text-lg">Repetição: {data.repetition}</p>
           </div>
         </div>
-        <Link href={``} className="text-blue-500 mt-5 flex items-center gap-1">
+        <Link
+          href={`/workOut/update/${data.idWorkOut}`}
+          className="text-blue-500 mt-5 flex items-center gap-1"
+        >
           <HiOutlinePencil className="w-5 h-5" /> Alterar item
         </Link>
       </div>
