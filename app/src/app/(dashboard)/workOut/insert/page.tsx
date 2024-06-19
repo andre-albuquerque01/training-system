@@ -1,4 +1,4 @@
-import { InsertWorkOutComponent } from '@/components/workOut/insert/insert'
+import { InsertWorkOutComponent } from '@/components/workOut/insert'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function InsertWorkOut() {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center mt-4">
       <InsertWorkOutComponent />
     </div>
   )
