@@ -6,6 +6,7 @@ import { DeleteTrainingComponente } from '@/components/training/delete'
 import { DeleteTrainingWorkOutComponente } from '@/components/trainingWorkOut/delete'
 import Image from 'next/image'
 import Link from 'next/link'
+import { BsPencilSquare } from 'react-icons/bs'
 import { CiCirclePlus } from 'react-icons/ci'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 
@@ -18,12 +19,19 @@ export default async function Training({ params }: { params: { id: string } }) {
         <div className="inline-block">
           <Link
             href={`/trainingWorkOut/insert/${params.id}`}
-            className="flex items-center gap-1 hover:text-blue-500"
+            className="flex items-center gap-1 max-w-40 hover:text-blue-500"
           >
             <CiCirclePlus className="w-5 h-5" />
             Adicionar itens
           </Link>
         </div>
+        <Link
+          href={`/training/update/${params.id}`}
+          className="flex items-center gap-1 max-w-40 hover:text-blue-500"
+        >
+          <BsPencilSquare className="w-5 h-5" />
+          Alterar treino
+        </Link>
         <div className="inline-block">
           <DeleteTrainingComponente id={params.id} />
         </div>
