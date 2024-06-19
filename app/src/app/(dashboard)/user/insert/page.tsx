@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function InsertUser() {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center mt-4">
       <InsertUserComponent />
     </div>
   )
