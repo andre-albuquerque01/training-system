@@ -4,12 +4,6 @@ import ApiAction from '@/functions/data/apiAction'
 import apiError from '@/functions/error/apiErro'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { WorkOutInterface } from '../workOut/showWorkOut'
-
-export interface TrainingInterface {
-  idTrainingWorkOut: string
-  workOut: WorkOutInterface
-}
 
 export interface UserInterface {
   name: string
