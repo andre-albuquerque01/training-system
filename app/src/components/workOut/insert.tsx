@@ -12,14 +12,14 @@ function FormButton() {
     <>
       {pending ? (
         <button
-          className="bg-red-600 text-white px-4 py-2 w-96 max-md:w-80 max-md:mx-auto rounded-lg"
+          className="bg-blue-600 text-white px-4 py-2 w-96 max-md:w-80 max-md:mx-auto rounded-lg"
           disabled={pending}
         >
           Cadastrando...
         </button>
       ) : (
         <button
-          className="bg-blue-500 text-white px-4 py-2 w-96 max-md:w-80 max-md:mx-auto rounded-lg"
+          className="bg-blue-600 text-white px-4 py-2 w-96 max-md:w-80 max-md:mx-auto rounded-lg"
           disabled={pending}
         >
           Cadastrar
@@ -43,7 +43,7 @@ export const InsertWorkOutComponent = () => {
       </Link>
       <InputComponent
         type="text"
-        label="Titúlo"
+        label="Título"
         name="name"
         id="name"
         required={true}
