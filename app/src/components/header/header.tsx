@@ -23,7 +23,7 @@ export const Header = () => {
   return (
     <header className="bg-zinc-900 ">
       <div className="max-w-[1200px] mx-auto px-5 flex justify-between items-center h-20 text-white ">
-        <Link href="/" className="">
+        <Link href="/dashboard" className="">
           <h1 className={`${fontLogo.className} capitalize text-2xl`}>
             {'Work Out'}
           </h1>
@@ -48,7 +48,7 @@ export const Header = () => {
             className={`z-50 transition-all w-full flex-col md:w-auto md:flex-row md:visible md:flex md:gap-1 text-white font-[700] items-center flex duration-1000 overflow-hidden top-[80px] right-0 left-0 justify-start gap-9 fixed h-0 md:h-auto md:static ${navbar ? 'w-full t h-screen pt-12 bg-black' : 'invisible flex transition-all duration-1000'}`}
           >
             <Link
-              href="/"
+              href="/dashboard"
               className="transform duration-500 rounded-md hover:bg-zinc-600 p-2"
             >
               <span onClick={() => setNavBar(false)}>HOME</span>
@@ -60,10 +60,10 @@ export const Header = () => {
               <span onClick={() => setNavBar(false)}>WorkOut</span>
             </Link>
             <Link
-              href="/projects"
+              href="/user"
               className="transform duration-500 rounded-md hover:bg-zinc-600 p-2"
             >
-              <span onClick={() => setNavBar(false)}>LogIn</span>
+              <span onClick={() => setNavBar(false)}>Perfil</span>
             </Link>
           </div>
         </nav>
