@@ -38,12 +38,11 @@ export async function InsertUser(
     })
 
     const data = await response.json()
-    console.log(data)
 
     const message =
-      typeof data.message === 'string'
-        ? data.message
-        : JSON.stringify(data.message)
+      data && data.data && typeof data.data.message === 'string'
+        ? data.data.message
+        : JSON.stringify(data?.data?.message || '')
 
     if (message && message.includes('The email has already been taken.'))
       throw new Error('E-mail já cadastrado!')

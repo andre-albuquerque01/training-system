@@ -28,24 +28,27 @@ export async function Login(
     const data = await response.json()
 
     const message =
-      typeof data.message === 'string'
-        ? data.message
-        : JSON.stringify(data.message)
+      data && data.data && typeof data.data.message === 'string'
+        ? data.data.message
+        : JSON.stringify(data?.data?.message || '')
 
-    if (message && message.includes('E-mail não verificado')) {
-      throw new Error('E-mail não verificado!')
+    if (message.includes('Email and password invalid.')) {
+      throw new Error('E-mail ou senha inválida!')
     }
 
-    if (message && message.includes('Email or password incorrect')) {
-      throw new Error('E-mail ou senha invalida!')
+    if (message.includes('E-mail não verificado')) {
+      throw new Error('E-mail não verificado')
     }
 
-    if (message && message.includes('Email and password invalid.')) {
-      throw new Error('E-mail ou senha invalida!')
+    if (message.includes('Email or password incorrect')) {
+      throw new Error('E-mail ou senha inválida!')
     }
 
-    if (message && message.includes('Email not registered')) {
+    if (message.includes('Email not registered')) {
       throw new Error('E-mail não registrado!')
+    }
+    if (message.includes('The password field must be at least 8 characters.')) {
+      throw new Error('E-mail ou senha inválida!')
     }
 
     if (!response.ok) throw new Error('Usuário ou senha inválido!')

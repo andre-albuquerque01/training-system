@@ -17,7 +17,6 @@ export async function InsertTrainingWorkOut(request: object) {
     })
 
     const data = await response.json()
-    console.log(data)
 
     const message =
       typeof data.message === 'string'
