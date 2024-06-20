@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function InsertTraining() {
   return (
-    <div className="flex justify-center items-center mt-4">
+    <div className="h-screen flex justify-center items-center ">
       <InsertTrainingComponent />
     </div>
   )
