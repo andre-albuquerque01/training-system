@@ -15,13 +15,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const token = cookies().get('token')?.value
+  const authentication =
+    token !== undefined && token.length >= 49 && token.length <= 53
   return (
     <html
       lang="pt-br"
       className={`bg-zinc-200 scroll-smooth antialiased ${fontBody.className}`}
     >
       <body>
-        {token && <Header />}
+        {authentication && <Header />}
         <div className="max-w-[1200px] mx-auto antialiased">{children}</div>
       </body>
     </html>

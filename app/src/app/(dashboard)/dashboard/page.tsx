@@ -20,16 +20,18 @@ export default async function Dashboard() {
       </div>
       <h1 className="font-bold py-2 text-lg">Meu treino</h1>
       <div className="flex w-full items-center flex-wrap gap-2">
-        {data.map((itens) => (
-          <Link
-            href={`/training/${itens.id}`}
-            key={itens.id}
-            className="border border-zinc-500 rounded-sm max-md:w-80 w-96 p-2 flex items-center justify-between transform duration-500 hover:scale-105 hover:bg-zinc-800 hover:text-white"
-          >
-            <div>{itens.name}</div>
-            <GoArrowRight className="w-5 h-5" />
-          </Link>
-        ))}
+        {data &&
+          data.length > 0 &&
+          data.map((itens) => (
+            <Link
+              href={`/training/${itens.id}`}
+              key={itens.id}
+              className="border border-zinc-500 rounded-sm max-md:w-80 w-96 p-2 flex items-center justify-between transform duration-500 hover:scale-105 hover:bg-zinc-800 hover:text-white"
+            >
+              <div>{itens.name}</div>
+              <GoArrowRight className="w-5 h-5" />
+            </Link>
+          ))}
       </div>
     </div>
   )
