@@ -34,8 +34,6 @@ export async function UpdatePasswordRecoverUser(
     })
 
     const data = await response.json()
-    console.log(data)
-
     const message =
       typeof data.message === 'string'
         ? data.message
