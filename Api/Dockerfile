@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
-    curl
+    curl \
+    libonig-dev 
 
 # Instale extensões PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
