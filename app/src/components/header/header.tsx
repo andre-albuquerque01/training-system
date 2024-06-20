@@ -2,6 +2,7 @@
 import { fontLogo } from '@/app/fonts'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { LogoutComponente } from '../user/logout/logout'
 
 export const Header = () => {
   const [navbar, setNavBar] = useState<boolean>(false)
@@ -65,6 +66,7 @@ export const Header = () => {
             >
               <span onClick={() => setNavBar(false)}>Perfil</span>
             </Link>
+            <LogoutComponente />
           </div>
         </nav>
       </div>

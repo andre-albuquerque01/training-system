@@ -53,7 +53,9 @@ export default async function WorkOut() {
                   <Link href={`/workOut/${data.idWorkOut}`}>
                     <MdKeyboardArrowRight className="w-5 h-8" />
                   </Link>
-                  <DeleteWorkOutComponente id={data.idWorkOut} />
+                  <div className="hover:text-white">
+                    <DeleteWorkOutComponente id={data.idWorkOut} />
+                  </div>
                 </div>
               </div>
             </div>

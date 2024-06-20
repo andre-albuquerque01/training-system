@@ -49,19 +49,24 @@ export const LoginComponent = () => {
           id="Senha"
           required={false}
         />
-        <span className="text-xs text-red-600">
-          {state.error}{' '}
-          {state.error === 'E-mail não verificado!' && (
+        {state && state.error === 'E-mail não verificado' && (
+          <span className="text-xs text-red-600">
             <Link
               href="/user/verify"
               className="text-blue-500 text-xs hover:underline"
             >
               Verificar e-mail
             </Link>
+          </span>
+        )}
+        {state.error &&
+          state.error !== 'E-mail não verificado' &&
+          state.error !==
+            "Cannot read properties of undefined (reading 'message')" && (
+            <span className="text-xs text-red-600">{state.error}</span>
           )}
-        </span>
         <p className="text-black text-xs">
-          Esqueceu a senha?{' '}
+          Esqueceu a senha?
           <Link
             href="/user/recover/sendEmail"
             className="text-blue-500 text-xs"
