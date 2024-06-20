@@ -15,7 +15,7 @@ export default async function Training({ params }: { params: { id: string } }) {
 
   return (
     <div className="p-4">
-      <div className="flex flex-col gap-3">
+      <div className="flex justify-evenly flex-wrap items-center gap-3">
         <div className="inline-block">
           <Link
             href={`/trainingWorkOut/insert/${params.id}`}
@@ -38,12 +38,12 @@ export default async function Training({ params }: { params: { id: string } }) {
       </div>
       <h1 className="font-bold text-xl">{data.name}</h1>
       <p>{data.description}</p>
-      <div className="flex items-center flex-wrap gap-4">
+      <div className="flex items-center flex-wrap gap-2">
         {data &&
           data.training?.map((item: TrainingInterface) => (
             <div
               key={item.idTrainingWorkOut}
-              className="border border-zinc-500 rounded-sm max-md:w-80 w-96  transform duration-500 hover:scale-105 hover:bg-zinc-800 hover:text-white"
+              className="border border-zinc-500 rounded-sm max-md:w-80 w-96 transform duration-500 hover:scale-105 hover:bg-zinc-800 hover:text-white"
             >
               <div className="relative flex items-center justify-between p-2 h-24">
                 <div className="w-[50%]">
