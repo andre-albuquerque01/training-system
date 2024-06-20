@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libonig-dev \
-    nginx  # Adiciona Nginx
+    nginx \
+    supervisor  # Adicione o supervisor
 
 # Instale extensões PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
@@ -34,4 +35,4 @@ EXPOSE 80
 # Start supervisord para gerenciar PHP-FPM e Nginx
 COPY ./supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-ENTRYPOINT ["supervisord"]
+ENTRYPOINT ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
