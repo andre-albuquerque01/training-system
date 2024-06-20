@@ -30,6 +30,9 @@ class UserService
     {
         try {
             if (Auth::attempt($data)) {
+                if (User::where('email', $data['email'])->whereNull('email_verified_at')->exists()) {
+                    return new GeneralResource(['message' => 'E-mail não verificado']);
+                }
                 $user = Auth::user();
                 $token = $this->request->user()->createToken('Jesus+' . $user->name, ['*'], now()->addHours(2))->plainTextToken;
                 return new AuthResource(['token' => $token]);
