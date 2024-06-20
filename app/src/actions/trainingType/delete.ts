@@ -21,7 +21,6 @@ export async function DeleteTrainingType(idTrainingType: string) {
     })
 
     const data = await response.json()
-    console.log(data)
 
     const message =
       typeof data.message === 'string'

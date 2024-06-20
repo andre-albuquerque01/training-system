@@ -10,18 +10,13 @@ export async function DeleteTrainingWorkOut(idTrainingWorkOut: string) {
     if (!idTrainingWorkOut) {
       throw new Error('Preenchas os dados!')
     }
-    const response = await ApiAction(
-      `/trainingWorkOut/destroyWorkOut/${idTrainingWorkOut}`,
-      {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + cookies().get('token')?.value,
-        },
+    await ApiAction(`/trainingWorkOut/destroyWorkOut/${idTrainingWorkOut}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + cookies().get('token')?.value,
       },
-    )
-    const data = await response.json()
-    console.log(data)
+    })
   } catch (error) {
     return apiError(error)
   }
