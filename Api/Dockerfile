@@ -1,7 +1,7 @@
-# Use o imagem oficial do PHP como base
+# Use imagem oficial do PHP com suporte ao FPM
 FROM php:8.0-fpm
 
-# Instale dependências de sistema
+# Instale dependências necessárias
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
@@ -14,33 +14,24 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    libonig-dev 
+    libonig-dev \
+    nginx  # Adiciona Nginx
 
 # Instale extensões PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Remover cache da instalação 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# Configuração do Nginx
+COPY ./nginx/default.conf /etc/nginx/sites-available/default
 
-# Sete o diretório de trabalho
+# Copie o projeto
 WORKDIR /var/www
+COPY . .
+RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www/storage
 
-# Copie o arquivo composer.lock e composer.json
-COPY composer.lock composer.json /var/www/
+# Exponha a porta 80 para Nginx
+EXPOSE 80
 
-# Instale dependências do Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
+# Start supervisord para gerenciar PHP-FPM e Nginx
+COPY ./supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Copie o restante do código do aplicativo
-COPY . /var/www
-
-# Ajuste permissões
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage
-
-# Exponha a porta da aplicação
-EXPOSE 9000
-
-# Inicie o PHP-FPM
-CMD ["php-fpm"]
+ENTRYPOINT ["supervisord"]
