@@ -10,7 +10,7 @@ Para operar o sistema, são necessários os seguintes requisitos mínimos na sua
 
 - Informações: permitir que os usuários do aplicativo façam login com seus dados pessoais, e-mail e senha.
 
-### Regras
+Regras
 
 - Cadastro novo usuário: para criar um novo cadastro de usuário, o usuário deve fornecer um endereço de email e uma senha. Após o cadastro, um email de confirmação será enviado para o endereço de email fornecido, a fim de validar o novo cadastro do usuário.
 - Esqueci a senha: o usuário esqueceu sua senha, logo é enviado um e-mail um token.
@@ -20,7 +20,7 @@ Para operar o sistema, são necessários os seguintes requisitos mínimos na sua
 
 - Informações: permitir que o usuário da aplicação gerencie seu treino, fazendo o cadastro/excluindo os treinos...
 
-### Regras
+Regras
 
 - A aplicação deve permitir que o usuário cadastre novos treinos;
 - A aplicação deve permitir que o usuário exclua treinos que não estejam mais em uso;
