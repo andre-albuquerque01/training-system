@@ -1,4 +1,6 @@
-# Work out in laravel
+# Sistema de treino
+
+O Sistema de Treino é uma aplicação completa que permite aos usuários gerenciar seus treinos de maneira simples e eficiente. 
 
 ## Requisitos do Sistema
 
